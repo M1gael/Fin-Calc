@@ -1,0 +1,24 @@
+program Project1;
+
+uses
+  Forms,
+  Choose_u in 'Choose_u.pas' {Form1},
+  Investment_u in 'Investment_u.pas' {frmInvestment},
+  Loan_u in 'Loan_u.pas' {frmLoan},
+  Annuity_u in 'Annuity_u.pas' {frmAnnuity},
+  Inflation_u in 'Inflation_u.pas' {frmInflation},
+  Simple_u in 'Simple_u.pas' {SimpleIntrest};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfrmInvestment, frmInvestment);
+  Application.CreateForm(TfrmLoan, frmLoan);
+  Application.CreateForm(TfrmAnnuity, frmAnnuity);
+  Application.CreateForm(TfrmInflation, frmInflation);
+  Application.CreateForm(TSimpleIntrest, SimpleIntrest);
+  Application.Run;
+end.

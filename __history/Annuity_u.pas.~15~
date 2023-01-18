@@ -1,0 +1,176 @@
+unit Annuity_u;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ComCtrls, Spin, ExtCtrls ,Math;
+
+type
+  TfrmAnnuity = class(TForm)
+    RadioGroup1: TRadioGroup;
+    Edit1: TEdit;
+    RadioGroup2: TRadioGroup;
+    SpinEdit1: TSpinEdit;
+    RadioGroup3: TRadioGroup;
+    Edit2: TEdit;
+    Result: TRichEdit;
+    btnClear: TButton;
+    btnCalculate: TButton;
+    comboInvestment: TComboBox;
+    RdgOut: TRadioGroup;
+    btnAnnuityClose: TButton;
+    procedure comboInvestmentChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnCalculateClick(Sender: TObject);
+    procedure btnClearClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmAnnuity: TfrmAnnuity;
+
+implementation
+
+uses dmFinCalc_u, LoginReg_u;
+
+{$R *.dfm}
+
+procedure TfrmAnnuity.btnCalculateClick(Sender: TObject);
+var rX , rF , rN ,rI : real;
+begin
+  case comboInvestment.ItemIndex of                            //XFN
+  0 : Begin                                         //X
+      rF := StrToFloat(edit1.Text);
+      rI := ((SpinEdit1.Value)/100)/12;
+      rN := StrToFloat(edit2.Text)*12;
+
+      rX :=  (rF *rI)/  ( Power(1+rI ,rN) -1 );
+      Result.Lines.Add('You will need to install a monthly ammount of atleast R' + floatToStrf( rX ,ffFixed , 8, 2 ));
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calc Type'] := 'Annuity Standard' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rF ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rI ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rN ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rX ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+
+      end;
+
+
+  1 : Begin                                         //F
+      rX := StrToFloat(edit1.Text);
+      rI := ((SpinEdit1.Value)/100)/12;
+      rN := StrToFloat(edit2.Text)*12;
+
+      rF :=  ((rX*(Power((1 + rI), rN) -1)))/ (rI);
+      Result.Lines.Add('With your given installment of R' + FloatToStr(rX) + ' and ' + floatToStrf((rI*100) ,ffFixed ,8,2)  + '% Interest' + 'You Will be Able to Have an Anuity of R' + floatToStrf( rF ,ffFixed , 8, 2 ));
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calc Type'] := 'Annuity Max Amount' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rX ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rI ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rN ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rF ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      end;
+
+
+  2 : Begin                                         //N
+      rF := StrToFloat(edit1.Text);
+      rX := (SpinEdit1.Value);
+      rI := StrToFloat(edit2.Text)/100;
+
+      rN := Log10((((rF*rI))/rX)+1) / (Log10(1+rI)) ;
+      Result.Lines.Add('Saving up will take about ' + floatToStrf( rN ,ffFixed , 8, 2 ) + ' months , or ' + floatToStrf( rN/12 ,ffFixed , 8, 2 ) + ' years.'  );
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calc Type'] := 'Annuity Time' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rF ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rX ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rI ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rN ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      end;
+  end;
+end;
+
+procedure TfrmAnnuity.btnClearClick(Sender: TObject);
+begin
+Result.Clear;
+end;
+
+procedure TfrmAnnuity.comboInvestmentChange(Sender: TObject);
+begin
+RadioGroup1.Visible := True ;
+RadioGroup2.Visible := True ;
+RadioGroup3.Visible := True ;
+
+RdgOut.Visible := True;
+Result.Visible := True;
+
+Edit1.Visible := True;
+Edit2.Visible := True;
+SpinEdit1.Visible := True;
+
+Edit1.Text := '' ;
+Edit2.Text := '' ;
+SpinEdit1.Value := 0 ;
+
+btnClear.Visible := True;
+btnCalculate.Visible := True ;
+Result.Lines.Clear;                                     ///XFN
+  case comboInvestment.ItemIndex of
+  0 : Begin                                                           //X
+      RadioGroup1.Caption := 'Value of item to be replaced:';
+      RadioGroup2.Caption := 'Interest (% decimal) ';    //
+      RadioGroup3.Caption := 'How long until replacement ( Years)';
+      Result.Lines.Add('To Calculate the Installment Value , Please Fill in the required fields below :');
+      Result.Lines.Add('=================================');
+      Result.Lines.Add('');
+      end;
+  1 : Begin                                                            //F
+      RadioGroup1.Caption := 'Amount of Monthly Installment';
+      RadioGroup2.Caption := 'Interest (% decimal) ';    //
+      RadioGroup3.Caption := 'How long until replacement ( Years)';
+      Result.Lines.Add('To Calculate the Maximum Value that Can be Replaced ,Please Fill in the fields Below :');
+      Result.Lines.Add('=================================');
+      Result.Lines.Add('');
+      end;
+  2 : Begin                                                            //N
+      RadioGroup1.Caption := 'Value of item to be replaced:';
+      RadioGroup2.Caption := 'Amount of Monthly Installment ';    //
+      RadioGroup3.Caption := 'Interest (% decimal)';
+      Result.Lines.Add('To Calculate the Time Needed for this Annuity, Please Fill in the required fields below :');
+      Result.Lines.Add('=================================');
+      Result.Lines.Add('');
+      end;
+  end;
+end;
+
+procedure TfrmAnnuity.FormCreate(Sender: TObject);
+begin
+RadioGroup1.Visible := False ;
+RadioGroup2.Visible := False ;
+RadioGroup3.Visible := False ;
+
+RdgOut.Visible := False;
+Result.Visible := False;
+
+Edit1.Visible := False;
+Edit2.Visible := False;
+SpinEdit1.Visible := False;
+
+btnClear.Visible := False;
+btnCalculate.Visible := False ;
+
+end;
+
+end.

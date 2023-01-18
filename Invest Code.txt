@@ -1,0 +1,41 @@
+Case For editing UI
+=====================================================================================================
+case comboInvestment.ItemIndex of
+  0 : Begin
+      lbl1.Caption := 'Installment Ammount in R:';
+      lbl2.Caption := 'Interrest in %: ';
+      lbl3.Caption := 'Amount of Monthly installments :';
+      redtOut.Lines.Add('You are about to calculate the Future investment :');
+      redtOut.Lines.Add('================');
+      redtOut.Lines.Add('');
+      end;
+  1 : Begin
+      lbl1.Caption := 'Future Amount in R:';
+      lbl2.Caption := 'Interrest in %: ';
+      lbl3.Caption := 'Time in Y:';
+      redtOut.Lines.Add('You Are About to Calculate the Installments Needed for Said Future Amount :');
+      redtOut.Lines.Add('================');
+      redtOut.Lines.Add('');
+      end;
+  2 : Begin
+      lbl1.Caption := 'Future Ammount in R:';
+      lbl2.Caption := 'Intallment Ammount in R: ';
+      lbl3.Caption := 'Time in Y:';
+      redtOut.Lines.Add('You are About to Calculate the Interest Required for Said Future Amount :');
+      redtOut.Lines.Add('================');
+      redtOut.Lines.Add('');
+      end;
+  3 : Begin
+      lbl1.Caption := 'Future Ammount in R:';
+      lbl2.Caption := 'Monthly Installment Amount in R: ';
+      lbl3.Caption := 'Interrest in %: ';
+      redtOut.Lines.Add('You are About to Calculate the Amount of Installments Needed to Realise the Investment :');
+      redtOut.Lines.Add('================');
+      redtOut.Lines.Add('');
+      end;
+
+
+
+Case For Logic 
+=====================================================================================================
+

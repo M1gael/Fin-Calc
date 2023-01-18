@@ -1,0 +1,87 @@
+object Annuity: TAnnuity
+  Left = 0
+  Top = 0
+  Caption = 'Annuity'
+  ClientHeight = 231
+  ClientWidth = 332
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object RadioGroup2: TRadioGroup
+    Left = 8
+    Top = 88
+    Width = 177
+    Height = 65
+    Caption = 'How long until replacement ( Years)'
+    TabOrder = 2
+  end
+  object RadioGroup1: TRadioGroup
+    Left = 8
+    Top = 8
+    Width = 177
+    Height = 65
+    Caption = 'Value of item to be replaced:'
+    TabOrder = 0
+  end
+  object Edit1: TEdit
+    Left = 16
+    Top = 32
+    Width = 137
+    Height = 21
+    TabOrder = 1
+  end
+  object SpinEdit1: TSpinEdit
+    Left = 16
+    Top = 112
+    Width = 137
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 3
+    Value = 0
+  end
+  object RadioGroup3: TRadioGroup
+    Left = 8
+    Top = 159
+    Width = 177
+    Height = 65
+    Caption = 'Interest (% decimal)'
+    TabOrder = 4
+  end
+  object Edit2: TEdit
+    Left = 16
+    Top = 183
+    Width = 137
+    Height = 21
+    TabOrder = 5
+  end
+  object TRichEdit
+    Left = 200
+    Top = 8
+    Width = 128
+    Height = 169
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 6
+  end
+  object TBitBtn
+    Left = 200
+    Top = 183
+    Width = 128
+    Height = 41
+    Caption = 'Calculate'
+    DoubleBuffered = True
+    ParentDoubleBuffered = False
+    TabOrder = 7
+  end
+end

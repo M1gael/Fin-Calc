@@ -1,0 +1,151 @@
+object frmInflation: TfrmInflation
+  Left = 0
+  Top = 0
+  Caption = 'Inflation'
+  ClientHeight = 336
+  ClientWidth = 316
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  DesignSize = (
+    316
+    336)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl1: TLabel
+    AlignWithMargins = True
+    Left = 184
+    Top = 64
+    Width = 74
+    Height = 13
+    Anchors = []
+    Caption = 'Ammount in R ?'
+    Visible = False
+    ExplicitLeft = 333
+    ExplicitTop = 76
+  end
+  object lbl2: TLabel
+    AlignWithMargins = True
+    Left = 184
+    Top = 114
+    Width = 76
+    Height = 13
+    Anchors = []
+    Caption = 'Interrest in % ?'
+    Visible = False
+    ExplicitLeft = 333
+    ExplicitTop = 135
+  end
+  object lbl3: TLabel
+    AlignWithMargins = True
+    Left = 185
+    Top = 161
+    Width = 71
+    Height = 13
+    Anchors = []
+    Caption = 'Time in years ?'
+    Visible = False
+    ExplicitLeft = 333
+    ExplicitTop = 190
+  end
+  object pnlInflationCaption: TPanel
+    AlignWithMargins = True
+    Left = 47
+    Top = 267
+    Width = 217
+    Height = 56
+    Anchors = []
+    Caption = 'Calculate Inflation'
+    TabOrder = 0
+    Visible = False
+    ExplicitLeft = 48
+    ExplicitTop = 231
+  end
+  object btnInflationCalculate: TButton
+    AlignWithMargins = True
+    Left = 47
+    Top = 203
+    Width = 217
+    Height = 41
+    Anchors = []
+    Caption = 'Calculate'
+    TabOrder = 1
+    Visible = False
+    OnClick = btnInflationCalculateClick
+    ExplicitLeft = 48
+    ExplicitTop = 176
+  end
+  object edt1: TEdit
+    AlignWithMargins = True
+    Left = 47
+    Top = 63
+    Width = 121
+    Height = 21
+    Anchors = []
+    TabOrder = 2
+    Visible = False
+    ExplicitLeft = 48
+    ExplicitTop = 54
+  end
+  object edt2: TEdit
+    AlignWithMargins = True
+    Left = 47
+    Top = 113
+    Width = 121
+    Height = 21
+    Anchors = []
+    TabOrder = 3
+    Visible = False
+    ExplicitLeft = 48
+    ExplicitTop = 98
+  end
+  object edt3: TEdit
+    AlignWithMargins = True
+    Left = 47
+    Top = 160
+    Width = 121
+    Height = 21
+    Anchors = []
+    TabOrder = 4
+    Visible = False
+    ExplicitLeft = 48
+    ExplicitTop = 139
+  end
+  object cbxInflation: TComboBox
+    AlignWithMargins = True
+    Left = 7
+    Top = 11
+    Width = 145
+    Height = 21
+    Anchors = []
+    TabOrder = 5
+    Text = 'Choose an option'
+    OnChange = cbxInflationChange
+    Items.Strings = (
+      ''
+      'After Inflation'
+      'Choose An Option'
+      'Interest For Inflation'
+      'Principle'
+      'Time For Inflation')
+    ExplicitLeft = 8
+    ExplicitTop = 8
+  end
+  object BitBtn2: TBitBtn
+    Left = 240
+    Top = 8
+    Width = 71
+    Height = 21
+    Anchors = []
+    Caption = 'Back'
+    DoubleBuffered = True
+    Kind = bkClose
+    ParentDoubleBuffered = False
+    TabOrder = 6
+    OnClick = BitBtn2Click
+  end
+end

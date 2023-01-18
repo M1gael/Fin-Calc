@@ -1,0 +1,76 @@
+object frmHistory: TfrmHistory
+  Left = 488
+  Top = 274
+  Caption = 'frmHistory'
+  ClientHeight = 368
+  ClientWidth = 599
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  PixelsPerInch = 96
+  TextHeight = 13
+  object BitBtn2: TBitBtn
+    Left = 514
+    Top = 0
+    Width = 81
+    Height = 41
+    DoubleBuffered = True
+    Kind = bkClose
+    ParentDoubleBuffered = False
+    TabOrder = 0
+    OnClick = BitBtn2Click
+  end
+  object dbgHistory: TDBGrid
+    Left = 2
+    Top = 47
+    Width = 593
+    Height = 319
+    Hint = 'History'
+    DataSource = DataModule1.ds2FinCalcHistory
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ImeName = 'hi'
+    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentFont = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'Calculation Type'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Var1'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Var2'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Var3'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Result'
+        Visible = True
+      end>
+  end
+end

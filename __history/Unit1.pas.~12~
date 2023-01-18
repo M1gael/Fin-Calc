@@ -1,0 +1,61 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    RadioGroup1: TRadioGroup;
+    RadioGroup2: TRadioGroup;
+    btnInvestments: TButton;
+    btnAnnuity: TButton;
+    btnLoan: TButton;
+    RadioGroup3: TRadioGroup;
+    btnInterestSimp: TButton;
+    btnInterestComb: TButton;
+    btnInflation: TButton;
+    btnValueDepression: TButton;
+    procedure btnInvestmentsClick(Sender: TObject);
+    procedure btnLoanClick(Sender: TObject);
+    procedure btnAnnuityClick(Sender: TObject);
+    procedure btnInflationClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+
+implementation
+
+uses Loan_u ,Investment_u ,Annuity_u , Inflation_u;
+
+{$R *.dfm}
+
+procedure TForm1.btnInflationClick(Sender: TObject);
+begin
+Inflation_u.frmInflation.Show;
+end;
+
+procedure TForm1.btnInvestmentsClick(Sender: TObject);
+begin
+Investment_u.frmInvestment.Show;
+end;
+
+procedure TForm1.btnAnnuityClick(Sender: TObject);
+begin
+Annuity_u.frmAnnuity.Show;
+end;
+
+procedure TForm1.btnLoanClick(Sender: TObject);
+begin
+Loan_u.frmLoan.Show;
+end;
+
+end.

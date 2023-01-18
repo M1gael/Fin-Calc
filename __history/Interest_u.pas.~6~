@@ -1,0 +1,292 @@
+unit Interest_u;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, Math;
+
+type
+  TSimpleIntrest = class(TForm)
+    u5Dropbox: TComboBox;
+    Label1: TLabel;
+    pnl1: TPanel;
+    edt1: TEdit;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    edt2: TEdit;
+    BitBtn1: TBitBtn;
+    lbl3: TLabel;
+    edt3: TEdit;
+    BitBtn2: TBitBtn;
+    procedure u5DropboxChange(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SimpleIntrest: TSimpleIntrest;
+   rRate , rPrincepal , rDesAmount , rTime : Real;
+   iTime : integer;
+implementation
+
+uses Choose_u, LoginReg_u, dmFinCalc_u;
+
+
+{$R *.dfm}
+
+procedure TSimpleIntrest.BitBtn1Click(Sender: TObject);
+begin
+
+ if (edt1.Text = '') or (edt2.Text = '') or (edt3.Text = '') then
+  Begin
+    ShowMessage('You have to fill in all the required information');
+  End
+    else
+      Begin
+        if (Choose_u.frmChoose.bFlagS = true) then
+          Begin
+
+ case u5Dropbox.ItemIndex of                                           //APIN  rDesAmmount  , rPrinc , rRate ,rTime
+  0 : Begin
+        rPrincepal := StrToFloat(edt1.Text);
+        rRate := (StrToFloat(edt2.Text)/100);
+        iTime := StrToInt(edt3.Text);
+
+          rDesAmount := rPrincepal * (1 + (rRate * iTime));
+
+        pnl1.Caption := 'Your investment will grow to : ' + FloatToStrF(rDesAmount , ffCurrency , 8 , 2);
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calculation Type'] := 'S Interest Default' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rPrincepal ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rRate ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rTime ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rDesAmount ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      End;
+
+
+  1 : Begin
+        rRate := (StrToFloat(edt1.Text)/100);
+        iTime := StrToInt(edt2.Text);
+        rDesAmount := StrToFloat(edt3.Text);
+
+          rPrincepal := (rDesAmount/(1+ (rRate * iTime)));
+
+        pnl1.Caption := 'You will need to invest : ' + FloatToStrF(rPrincepal , ffCurrency , 10,2);
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calculation Type'] := 'S Interest Princepal' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rDesAmount ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rRate ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rTime ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rPrincepal ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      end;
+
+
+  2 : Begin
+        rPrincepal := StrToFloat(edt1.Text);
+        iTime := StrToInt(edt2.Text);
+        rDesAmount := StrToFloat(edt3.Text);
+
+          rRate := ((rDesAmount/rPrincepal - 1)/iTime) * 100 ;
+
+        pnl1.Caption := 'Your investment will have to grow at :' + FloatToStrF(rRate , ffFixed , 8,2)+'%';
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calculation Type'] := 'S Interest Rate' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rDesAmount ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rPrincepal ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rTime ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rRate ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      End;
+
+
+  3 : Begin
+        rPrincepal := StrToFloat(edt1.Text);
+        rRate := StrToInt(edt2.Text);
+        rDesAmount := StrToFloat(edt3.Text);
+
+          rTime := ((rDesAmount/rPrincepal - 1)/rRate)*100;
+
+        pnl1.Caption := 'You will need to invest for a total of : ' + FloatToStrF(rTime, ffFixed , 8,2) + ' Years';
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calculation Type'] := 'S Interest Time' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rDesAmount ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rPrincepal ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rRate ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rTime ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      End;
+
+ end;
+ end
+ Else
+  Begin
+
+  // Compund Intrest
+   case u5Dropbox.ItemIndex of
+  0 : Begin
+        rPrincepal := StrToFloat(edt1.Text);
+        rRate := (StrToFloat(edt2.Text)/100);
+        iTime := StrToInt(edt3.Text);
+
+          rDesAmount := rPrincepal * (Power((1 + rRate) , iTime));
+
+        pnl1.Caption := 'Your investment will grow to : ' + FloatToStrF(rDesAmount , ffCurrency , 8 , 2);
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calculation Type'] := 'C Interest Default' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rPrincepal ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rRate ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rTime ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rDesAmount ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      End;
+
+  1 : Begin
+        rRate := (StrToFloat(edt1.Text)/100);
+        iTime := StrToInt(edt2.Text);
+        rDesAmount := StrToFloat(edt3.Text);
+
+          rPrincepal := (rDesAmount / (Power((1 + rRate) , iTime)));
+
+        pnl1.Caption := 'You will need to invest : ' + FloatToStrF(rPrincepal , ffCurrency , 10,2);
+
+        dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calculation Type'] := 'C Interest Princepal' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rDesAmount ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rRate ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rTime ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rPrincepal ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      end;
+
+  2 : Begin
+        rPrincepal := StrToFloat(edt1.Text);
+        iTime := StrToInt(edt2.Text);
+        rDesAmount := StrToFloat(edt3.Text);
+
+          rRate := ((Power(rDesAmount , (1 / iTime)) / Power(rPrincepal , (1 / iTime))) - 1) * 100 ;
+
+        pnl1.Caption := 'Your investment will have to grow at :' + FloatToStrF(rRate , ffFixed , 8,2)+'%';
+
+              dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calculation Type'] := 'C Interest Rate' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rDesAmount ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rPrincepal ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rTime ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rRate ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      End;
+
+  3 : Begin
+        rPrincepal := StrToFloat(edt1.Text);
+        rRate := StrToInt(edt2.Text);
+        rDesAmount := StrToFloat(edt3.Text);
+
+          rTime := (Log10(rDesAmount/rPrincepal) / (Log10(1+rRate)));
+
+        pnl1.Caption := 'You will need to invest for a total of : ' + FloatToStrF(rTime, ffFixed , 8,2) + ' Years';
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calculation Type'] := 'S Interest Time' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := rDesAmount ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rPrincepal ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rRate ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rTime ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+      End;
+
+ end;
+  End;
+      End;
+
+ end;
+
+
+procedure TSimpleIntrest.FormCreate(Sender: TObject);
+begin
+  if (u5Dropbox.ItemIndex = 0) then
+    Begin
+      lbl1.Caption := ' Princepal Amount : ';
+      lbl2.Caption := ' Intrest Rate : ';
+      lbl3.Caption := ' Time Period : ';
+    End;
+    edt3.Visible := true;
+  lbl3.Visible := true;
+  lbl1.Visible := true;
+  lbl2.Visible := true;
+  edt1.Visible := true;
+  edt2.Visible := true;
+  pnl1.Visible := true;
+  BitBtn1.Visible := true;
+end;
+
+procedure TSimpleIntrest.u5DropboxChange(Sender: TObject);
+begin
+case u5Dropbox.ItemIndex of
+  0 : Begin
+        lbl1.Caption := ' Princepal Amount : ';
+        lbl2.Caption := ' Intrest Rate : ';
+        lbl3.Caption := ' Time Period : ';
+        pnl1.Caption := ' ' ;
+        edt1.Clear;
+        edt2.Clear;
+        edt3.Clear;
+      End;
+  1 : Begin
+        lbl1.Caption := ' Intrest Rate : ';
+        lbl2.Caption := ' Time in Year : ';
+        lbl3.Caption := ' Desired Amount : ';
+        pnl1.Caption := ' ' ;
+        edt1.Clear;
+        edt2.Clear;
+        edt3.Clear;
+      end;
+  2 : Begin
+        lbl1.Caption := ' Princepal : ';
+        lbl2.Caption := ' Time in Year : ';
+        lbl3.Caption := ' Desired Amount : ';
+        pnl1.Caption := ' ' ;
+        edt1.Clear;
+        edt2.Clear;
+        edt3.Clear;
+      End;
+  3 : Begin
+        lbl1.Caption := ' Princepal : ';
+        lbl2.Caption := ' Intrest Rate : ';
+        lbl3.Caption := ' Desired Amount : ';
+        pnl1.Caption := ' ' ;
+        edt1.Clear;
+        edt2.Clear;
+        edt3.Clear;
+      End;
+end;
+  edt3.Visible := true;
+  lbl3.Visible := true;
+  lbl1.Visible := true;
+  lbl2.Visible := true;
+  edt1.Visible := true;
+  edt2.Visible := true;
+  pnl1.Visible := true;
+  BitBtn1.Visible := true;
+end;
+
+end.

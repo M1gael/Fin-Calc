@@ -1,0 +1,65 @@
+unit ValueDec_u;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, Math, ExtCtrls;
+
+type
+  TfrmValueDec = class(TForm)
+    lbl1: TLabel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    pnl1: TPanel;
+    edt1: TEdit;
+    edt2: TEdit;
+    BitBtn1: TBitBtn;
+    edt3: TEdit;
+    BitBtn2: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmValueDec: TfrmValueDec;
+  rYears , rRate , rValue , rAwns : Real ;
+implementation
+
+uses dmFinCalc_u;
+
+{$R *.dfm}
+
+procedure TfrmValueDec.BitBtn1Click(Sender: TObject);
+begin
+
+if (edt1.Text = '') or (edt2.Text = '') or (edt3.Text = '') then
+Begin
+ShowMessage('You have to fill in all the required information');
+end
+else
+begin
+ rYears := StrToFloat(edt3.Text);
+ rRate := StrToFloat(edt2.Text)/100;
+ rValue := StrToFloat(edt1.Text);
+
+  rAwns := rValue * (Power((1 - rRate) , rYears));
+
+  pnl1.Caption := ( 'Your asset is worth : ' + floatToStrf( rAwns ,ffFixed , 8, 2 )) + ' after ' + FloatToStr(rYears) + 'years'  );
+
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Append;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Username'] := LoginReg_u.frmLoginReg.sActiveUser;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Calc Type'] := 'Value Depression' ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var1'] := r ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var2'] := rI ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Var3'] := rN ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory['Result'] := rAwns ;
+      dmFinCalc_u.DataModule1.ADOTFinCalcHistory.Post;
+
+  end;
+
+end;
+end.

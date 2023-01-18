@@ -1,0 +1,30 @@
+unit Unit4;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ComCtrls, Spin, ExtCtrls;
+
+type
+  TAnnuity = class(TForm)
+    RadioGroup1: TRadioGroup;
+    Edit1: TEdit;
+    RadioGroup2: TRadioGroup;
+    SpinEdit1: TSpinEdit;
+    RadioGroup3: TRadioGroup;
+    Edit2: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Annuity: TAnnuity;
+
+implementation
+
+{$R *.dfm}
+
+end.

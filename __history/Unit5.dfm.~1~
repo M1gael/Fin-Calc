@@ -1,0 +1,84 @@
+object frmInflation: TfrmInflation
+  Left = 0
+  Top = 0
+  Caption = 'Inflation'
+  ClientHeight = 252
+  ClientWidth = 245
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblP: TLabel
+    Left = 146
+    Top = 17
+    Width = 74
+    Height = 13
+    Caption = 'Ammount in R ?'
+  end
+  object lblI: TLabel
+    Left = 146
+    Top = 61
+    Width = 76
+    Height = 13
+    Caption = 'Interrest in % ?'
+  end
+  object lblN: TLabel
+    Left = 146
+    Top = 102
+    Width = 79
+    Height = 13
+    Caption = 'Time in months ?'
+  end
+  object spnP: TSpinEdit
+    Left = 8
+    Top = 8
+    Width = 121
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 0
+    Value = 0
+  end
+  object spnI: TSpinEdit
+    Left = 8
+    Top = 52
+    Width = 121
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 1
+    Value = 0
+  end
+  object spnN: TSpinEdit
+    Left = 8
+    Top = 93
+    Width = 121
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 2
+    Value = 0
+  end
+  object pnlInflationCaption: TPanel
+    Left = 8
+    Top = 188
+    Width = 217
+    Height = 56
+    Caption = 'Calculate Inflation'
+    TabOrder = 3
+  end
+  object btnInflationCalculate: TButton
+    Left = 8
+    Top = 136
+    Width = 217
+    Height = 41
+    Caption = 'Calculate'
+    TabOrder = 4
+    OnClick = btnInflationCalculateClick
+  end
+end

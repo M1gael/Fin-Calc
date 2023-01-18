@@ -1,0 +1,43 @@
+unit Unit5;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Spin , Math;
+
+type
+  TfrmInflation = class(TForm)
+    spnP: TSpinEdit;
+    spnI: TSpinEdit;
+    spnN: TSpinEdit;
+    lblP: TLabel;
+    pnlInflationCaption: TPanel;
+    lblI: TLabel;
+    lblN: TLabel;
+    btnInflationCalculate: TButton;
+    procedure btnInflationCalculateClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmInflation: TfrmInflation;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmInflation.btnInflationCalculateClick(Sender: TObject);
+var rP , rI , rA , rN :real ;
+begin
+rP := spnP.Value;
+rN := spnN.Value;
+rI := spnI.Value;
+
+rA = (rP)pw(1 + rI)
+end;
+
+end.

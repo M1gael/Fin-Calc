@@ -1,0 +1,96 @@
+object ValueDecF: TValueDecF
+  Left = 0
+  Top = 0
+  Caption = 'Value Depreciation'
+  ClientHeight = 219
+  ClientWidth = 752
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl1: TLabel
+    Left = 8
+    Top = 37
+    Width = 73
+    Height = 13
+    Caption = 'Current Value :'
+  end
+  object lbl2: TLabel
+    Left = 304
+    Top = 37
+    Width = 30
+    Height = 13
+    Caption = 'Rate :'
+  end
+  object lbl3: TLabel
+    Left = 609
+    Top = 37
+    Width = 34
+    Height = 13
+    Caption = 'Years :'
+  end
+  object pnl1: TPanel
+    Left = 0
+    Top = 153
+    Width = 750
+    Height = 64
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGreen
+    Font.Height = -15
+    Font.Name = 'Times New Roman'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object edt1: TEdit
+    Left = 8
+    Top = 56
+    Width = 149
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 1
+  end
+  object edt2: TEdit
+    Left = 304
+    Top = 56
+    Width = 149
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 2
+  end
+  object BitBtn1: TBitBtn
+    Left = 272
+    Top = 96
+    Width = 213
+    Height = 42
+    Caption = 'Calculate'
+    DoubleBuffered = True
+    Kind = bkOK
+    ParentDoubleBuffered = False
+    TabOrder = 3
+    OnClick = BitBtn1Click
+  end
+  object edt3: TEdit
+    Left = 600
+    Top = 56
+    Width = 149
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 4
+  end
+  object BitBtn2: TBitBtn
+    Left = 0
+    Top = 0
+    Width = 57
+    Height = 25
+    DoubleBuffered = True
+    Kind = bkClose
+    ParentDoubleBuffered = False
+    TabOrder = 5
+  end
+end

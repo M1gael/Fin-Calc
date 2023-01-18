@@ -1,0 +1,100 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Financial Calculator'
+  ClientHeight = 310
+  ClientWidth = 412
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object RadioGroup1: TRadioGroup
+    Left = 8
+    Top = 8
+    Width = 105
+    Height = 138
+    Caption = 'Future'
+    TabOrder = 0
+  end
+  object RadioGroup2: TRadioGroup
+    Left = 8
+    Top = 152
+    Width = 105
+    Height = 153
+    Caption = 'Present'
+    TabOrder = 1
+  end
+  object btnInvestments: TButton
+    Left = 24
+    Top = 32
+    Width = 73
+    Height = 41
+    Caption = 'Investments'
+    TabOrder = 2
+    OnClick = btnInvestmentsClick
+  end
+  object btnAnnuity: TButton
+    Left = 24
+    Top = 97
+    Width = 73
+    Height = 42
+    Caption = 'Annuity'
+    TabOrder = 3
+    OnClick = btnAnnuityClick
+  end
+  object btnLoan: TButton
+    Left = 24
+    Top = 175
+    Width = 73
+    Height = 42
+    Caption = 'Loans'
+    TabOrder = 4
+    OnClick = btnLoanClick
+  end
+  object RadioGroup3: TRadioGroup
+    Left = 136
+    Top = 8
+    Width = 274
+    Height = 297
+    Caption = 'Other'
+    TabOrder = 5
+  end
+  object btnInterestSimp: TButton
+    Left = 152
+    Top = 32
+    Width = 98
+    Height = 42
+    Caption = 'Simple interest'
+    TabOrder = 6
+  end
+  object btnInterestComb: TButton
+    Left = 152
+    Top = 97
+    Width = 98
+    Height = 41
+    Caption = 'Combined interest'
+    TabOrder = 7
+  end
+  object btnInflation: TButton
+    Left = 152
+    Top = 159
+    Width = 98
+    Height = 41
+    Caption = 'Inflation'
+    TabOrder = 8
+    OnClick = btnInflationClick
+  end
+  object btnValueDepression: TButton
+    Left = 152
+    Top = 221
+    Width = 98
+    Height = 41
+    Caption = 'Value Depression'
+    TabOrder = 9
+  end
+end
